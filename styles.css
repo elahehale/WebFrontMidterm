@@ -32,6 +32,7 @@ html {
 
 .column-6 {
      width: 50% !important;
+     padding: 0.4rem;
 }
 
 .content-container {
