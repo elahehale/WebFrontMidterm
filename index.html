@@ -12,7 +12,7 @@
 
 <body class="bg-image">
     <div class="flex-container align-justify-center full-screen-div">
-        <div class="content-container flex-container" style="min-width: 30rem;">
+        <div class="content-container flex-container" style="min-width: 40rem;">
             <div class="column-6">
                 <h1>
                     Mr. or Ms.?
@@ -33,7 +33,7 @@
                 <div>
                     <button class="btn" id="submit-btn">Submit</button>
                     <br/>
-                    <button class="btn">Save</button>
+                    <button class="btn" id="save-btn">Save</button>
 
                 </div>
             </div>
@@ -44,6 +44,13 @@
                 <div>
                     <p id="predicted-gender"></p>
                     <p id="predicted-probability"></p>
+                    <div class="saved-answer-container" id="saved-answer-section">
+                        <h1 style="margin-top: 0.2rem;">
+                            Saved Answer
+                        </h1>
+                        <p id="saved-gender"></p>
+                        <button class="btn" id="clear-saved-answer-btn" style="margin-bottom: 0;">Clear</button>
+                    </div>
                 </div>
             </div>
 

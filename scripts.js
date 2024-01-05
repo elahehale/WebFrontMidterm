@@ -15,28 +15,59 @@ document.addEventListener('DOMContentLoaded', function () {
     var nameInput = document.getElementById('name')
     var probOutput = document.getElementById('predicted-probability')
     var genderOutput = document.getElementById('predicted-gender')
+    var answerSection = document.getElementById('saved-answer-section');
 
     submitButton.addEventListener('click', function () {
         var name = nameInput.value
         var url = 'https://api.genderize.io/?name=' + name;
+        clearResults()
         fetch(url)
             .then(response => {
-                if (!response.ok) {
+                if (!response.ok)
                     throw new Error('Network response was not ok');
-                }
                 return response.json();
             })
             .then(data => {
                 console.log(data);
                 genderOutput.textContent = data.gender;
                 probOutput.textContent = data.probability
-
+                showSavedPrediction(nameInput.value)
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Handle the error (e.g., display an error message to the user)
             });
 
     })
 
+
+    // save input prediction
+    var saveButton = document.getElementById('save-btn');
+    saveButton.addEventListener('click', function () {
+        var saveValue = ""
+        radioButtons.forEach(function (radioButton) {
+            if (radioButton.checked) {
+                saveValue = radioButton.value
+            }
+        });
+        localStorage.setItem(nameInput.value, saveValue);
+    })
+
+    function showSavedPrediction(name) {
+        var item = localStorage.getItem(name);
+        console.log(name)
+        if (item !== null) {
+            var savedValue = document.getElementById('saved-gender');
+            savedValue.textContent = item
+            answerSection.style.display='block'
+
+        } else {
+            console.log('Item with key ' + name + ' does not exist in local storage.');
+        }
+    }
+
+    function clearResults(){
+        answerSection.style.display='none'
+        genderOutput.textContent = null;
+        probOutput.textContent = null
+    }
 });
