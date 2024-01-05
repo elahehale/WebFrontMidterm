@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearResults()
         fetch(url)
             .then(response => {
+                showSnackBar('fetch successfully','#000')
                 if (!response.ok)
                     throw new Error('Network response was not ok');
                 return response.json();
@@ -65,18 +66,33 @@ document.addEventListener('DOMContentLoaded', function () {
         if (item !== null) {
             var savedValue = document.getElementById('saved-gender');
             savedValue.textContent = item
-            answerSection.style.display='block'
+            answerSection.style.display = 'block'
 
         } else {
             console.log('Item with key ' + name + ' does not exist in local storage.');
-            answerSection.style.display='none'
+            answerSection.style.display = 'none'
 
         }
     }
 
-    function clearResults(){
-        answerSection.style.display='none'
+    function clearResults() {
+        answerSection.style.display = 'none'
         genderOutput.textContent = null;
         probOutput.textContent = null
+    }
+
+    var timer = null
+    var snackbar = document.getElementById("snackbar");
+
+    function showSnackBar(text,color) {
+        // Add the "show" class to DIV
+        snackbar.style.backgroundColor = color
+        snackbar.textContent = text
+        snackbar.classList.add('show');
+
+            // Hide the snackbar after 3 seconds (adjust as needed)
+            setTimeout(function () {
+                snackbar.classList.remove('show');
+            }, 3000);
     }
 });
