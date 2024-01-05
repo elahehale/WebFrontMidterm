@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 console.log(data);
                 if (data.gender === null) {
+                    showSnackBar('No result for this name from server', 'red')
                     genderOutput.textContent = 'No result for this name from server';
                 } else {
                     genderOutput.textContent = data.gender;
