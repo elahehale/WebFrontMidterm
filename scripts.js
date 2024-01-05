@@ -52,6 +52,13 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem(nameInput.value, saveValue);
     })
 
+    var clearSavedAnswerButton = document.getElementById('clear-saved-answer-btn');
+    clearSavedAnswerButton.addEventListener('click', function () {
+        localStorage.removeItem(nameInput.value);
+        showSavedPrediction()
+    })
+
+
     function showSavedPrediction(name) {
         var item = localStorage.getItem(name);
         console.log(name)
@@ -62,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         } else {
             console.log('Item with key ' + name + ' does not exist in local storage.');
+            answerSection.style.display='none'
+
         }
     }
 
