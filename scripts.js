@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
     })
-    function enableButtons(enability){
+    function enableButtons(enability) {
         submitButton.disabled = !enability
         saveButton.disabled = !enability
     }
@@ -60,19 +60,24 @@ document.addEventListener('DOMContentLoaded', function () {
         clearResults()
         fetch(url)
             .then(response => {
-                showSnackBar('fetch successfully', '#000')
                 if (!response.ok)
                     throw new Error('Network response was not ok');
                 return response.json();
             })
             .then(data => {
                 console.log(data);
-                genderOutput.textContent = data.gender;
-                probOutput.textContent = data.probability
+                if (data.gender === null) {
+                    genderOutput.textContent = 'No result for this name from server';
+                } else {
+                    genderOutput.textContent = data.gender;
+                    probOutput.textContent = data.probability;
+                }
                 showSavedPrediction(nameInput.value)
             })
             .catch(error => {
                 console.error('Error:', error);
+                showSnackBar(error.message, 'red')
+
             });
 
     })
@@ -81,13 +86,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // save input prediction
     var saveButton = document.getElementById('save-btn');
     saveButton.addEventListener('click', function () {
-        var saveValue = ""
+        var saveValue = null
         radioButtons.forEach(function (radioButton) {
             if (radioButton.checked) {
                 saveValue = radioButton.value
             }
         });
-        localStorage.setItem(nameInput.value, saveValue);
+        if (saveValue === null) {
+            showSnackBar('Choose a gender', 'red')
+        } else {
+
+            localStorage.setItem(nameInput.value, saveValue);
+            showSnackBar('Name saved successfully', 'black')
+
+        }
     })
 
     var clearSavedAnswerButton = document.getElementById('clear-saved-answer-btn');
