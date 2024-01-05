@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mr or Ms?</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+
+</head>
+
+<body class="bg-image">
+    <div class="flex-container align-justify-center full-screen-div">
+        <div class="content-container flex-container" style="min-width: 30rem;">
+            <div class="column-6">
+                <h1>
+                    Mr. or Ms.?
+                </h1>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" class="name-input-field" id="name" name="name">
+                </div>
+                <div style="margin-top: 1rem; margin-bottom: 1rem;">
+
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label><br>
+                    <div style="height: 0.5rem;"></div>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label><br>
+                    <button class="clear-btn">clear</button>
+                </div>
+                <div>
+                    <button class="btn">Submit</button>
+                    <br/>
+                    <button class="btn">Save</button>
+
+                </div>
+            </div>
+            <div class="column-6">
+                <h1>
+                    Prediction
+                </h1>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
