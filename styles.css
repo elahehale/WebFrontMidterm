@@ -7,6 +7,7 @@
 
 body,
 html {
+     font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
      height: 100%;
      width: 100%;
      margin: 0;
@@ -51,13 +52,6 @@ html {
      transition: all 0.2s ease-in-out 0s;
      line-height: 18px;
      font-weight: normal;
-
-     :focus {
-          outline: none;
-          border: 1px solid #007c89;
-          box-shadow: inset 0 0 0 1px #007c89;
-     }
-
 }
 
 input[type="radio"] {
@@ -91,10 +85,14 @@ input[type="radio"]+label:before {
      border-radius: 50%;
      /* Make it a circle */
 }
-input[type="radio"]:not(:checked) + label:before {
-     background-color: #fff!important; /* Reset background color when not selected */
-     border-color: #000000; /* Border color when not selected */
- }
+
+input[type="radio"]:not(:checked)+label:before {
+     background-color: #fff !important;
+     /* Reset background color when not selected */
+     border-color: #000000;
+     /* Border color when not selected */
+}
+
 /* Style for the custom radio button when selected */
 input[type="radio"]:checked+label:before {
      background-color: #000000;
@@ -102,12 +100,13 @@ input[type="radio"]:checked+label:before {
      border-color: #000000;
      /* Change border color when selected */
 }
-input[type="radio"] + label {
+
+input[type="radio"]+label {
      pointer-events: all;
- }
+}
 
 .btn {
-     min-width: 10rem!important;
+     min-width: 10rem !important;
      background-color: #ffffff;
      color: black;
      padding: 0.5rem;
@@ -123,8 +122,21 @@ input[type="radio"] + label {
 .btn:hover {
      background-color: black;
      color: white;
-}
+ }
+ 
+ .btn:disabled {
+     color: rgba(0, 0, 0, 0.3);
+     border: 2px solid rgba(0, 0, 0, 0.3);
+     background-color: transparent; /* Ensures no background color on disabled state */
+     cursor: not-allowed;
+ }
+ 
+ .btn:disabled:hover {
+     color: rgba(0, 0, 0, 0.3);
+     border: 2px solid rgba(0, 0, 0, 0.3);
+     background-color: transparent; /* Ensures no background color on disabled state */
 
+ }
 .clear-btn {
      background-color: #ffffff00;
      color: rgba(0, 0, 0, 0.3);
@@ -141,9 +153,24 @@ input[type="radio"] + label {
      color: black;
 
 }
-.saved-answer-container{
-     border: dotted  rgb(95, 95, 95) 2px;
+
+.saved-answer-container {
+     border: dotted rgb(95, 95, 95) 2px;
      border-radius: 5px;
      padding: 0.5rem;
      display: none;
+}
+
+.error-message {
+     color: red;
+     margin-top: 5px;
+     opacity: 0;
+     transition: all 0.2s;
+     font-size: 0.7rem;
+     padding-left: 3.2rem;
+}
+
+.error {
+     outline: none !important;
+     border: solid 2px red;
 }

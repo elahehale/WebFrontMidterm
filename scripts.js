@@ -16,6 +16,43 @@ document.addEventListener('DOMContentLoaded', function () {
     var probOutput = document.getElementById('predicted-probability')
     var genderOutput = document.getElementById('predicted-gender')
     var answerSection = document.getElementById('saved-answer-section');
+    var nameErrorMessageElement = document.getElementById('error-message');
+
+    nameInput.addEventListener('input', function () {
+        if (!nameValidate(nameInput.value)) {
+            nameErrorMessageElement.style.opacity = 1
+            nameInput.classList.add('error');
+            enableButtons(false)
+        } else {
+            nameErrorMessageElement.style.opacity = 0
+            nameInput.classList.remove('error');
+            enableButtons(true)
+
+        }
+    })
+    function enableButtons(enability){
+        submitButton.disabled = !enability
+        saveButton.disabled = !enability
+    }
+    function nameValidate(name) {
+        var regexPattern = /^[a-zA-Z\s]+$/;
+        if (name.trim() === '') {
+            nameErrorMessageElement.textContent = 'Name should not be empty'
+            return false
+        } else {
+            if (!regexPattern.test(name)) {
+                nameErrorMessageElement.textContent = 'Just use english letters'
+                return false
+            } else {
+                if (name.length > 255) {
+                    nameErrorMessageElement.textContent = 'Name should be at most 255 charcters'
+                    return false
+                } else {
+                    return true
+                }
+            }
+        }
+    }
 
     submitButton.addEventListener('click', function () {
         var name = nameInput.value
@@ -23,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearResults()
         fetch(url)
             .then(response => {
-                showSnackBar('fetch successfully','#000')
+                showSnackBar('fetch successfully', '#000')
                 if (!response.ok)
                     throw new Error('Network response was not ok');
                 return response.json();
@@ -84,15 +121,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var timer = null
     var snackbar = document.getElementById("snackbar");
 
-    function showSnackBar(text,color) {
+    function showSnackBar(text, color) {
         // Add the "show" class to DIV
         snackbar.style.backgroundColor = color
         snackbar.textContent = text
         snackbar.classList.add('show');
 
-            // Hide the snackbar after 3 seconds (adjust as needed)
-            setTimeout(function () {
-                snackbar.classList.remove('show');
-            }, 3000);
+        // Hide the snackbar after 3 seconds (adjust as needed)
+        setTimeout(function () {
+            snackbar.classList.remove('show');
+        }, 3000);
     }
 });
