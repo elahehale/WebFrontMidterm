@@ -58,14 +58,17 @@ document.addEventListener('DOMContentLoaded', function () {
         var name = nameInput.value
         var url = 'https://api.genderize.io/?name=' + name;
         clearResults()
+        submitButton.innerHTML = '<div class="loader"></div>'
+        enableButtons(false)
         fetch(url)
             .then(response => {
+                resetButtons()
                 if (!response.ok)
                     throw new Error('Network response was not ok');
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                resetButtons()
                 if (data.gender === null) {
                     showSnackBar('No result for this name from server', 'red')
                     genderOutput.textContent = 'No result for this name from server';
@@ -76,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 showSavedPrediction(nameInput.value)
             })
             .catch(error => {
+                resetButtons()
                 console.error('Error:', error);
                 showSnackBar(error.message, 'red')
 
@@ -83,7 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
-
+    function resetButtons(){
+        enableButtons(true)
+        submitButton.innerHTML='Submit'
+    }
     // save input prediction
     var saveButton = document.getElementById('save-btn');
     saveButton.addEventListener('click', function () {
@@ -143,6 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide the snackbar after 3 seconds (adjust as needed)
         setTimeout(function () {
             snackbar.classList.remove('show');
-        }, 3000);
+        }, 2000);
     }
 });
