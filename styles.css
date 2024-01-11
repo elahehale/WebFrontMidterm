@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* set image for background
+set background size to cover entire page */
 .bg-image {
      background-image: url('images/bg.png');
      background-size: cover;
@@ -31,7 +33,7 @@ html {
      justify-content: center;
 }
 
-.column-6 {
+.width-50 {
      width: 50% !important;
      padding: 0.4rem;
 }
@@ -122,21 +124,24 @@ input[type="radio"]+label {
 .btn:hover {
      background-color: black;
      color: white;
- }
- 
- .btn:disabled {
-     color: rgba(0, 0, 0, 0.3);
-     border: 2px solid rgba(0, 0, 0, 0.3);
-     background-color: transparent; /* Ensures no background color on disabled state */
-     cursor: not-allowed;
- }
- 
- .btn:disabled:hover {
-     color: rgba(0, 0, 0, 0.3);
-     border: 2px solid rgba(0, 0, 0, 0.3);
-     background-color: transparent; /* Ensures no background color on disabled state */
+}
 
- }
+.btn:disabled {
+     color: rgba(0, 0, 0, 0.3);
+     border: 2px solid rgba(0, 0, 0, 0.3);
+     background-color: transparent;
+     /* Ensures no background color on disabled state */
+     cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+     color: rgba(0, 0, 0, 0.3);
+     border: 2px solid rgba(0, 0, 0, 0.3);
+     background-color: transparent;
+     /* Ensures no background color on disabled state */
+
+}
+
 .clear-btn {
      background-color: #ffffff00;
      color: rgba(0, 0, 0, 0.3);
@@ -174,21 +179,48 @@ input[type="radio"]+label {
      outline: none !important;
      border: solid 2px red;
 }
+
+/* style a loader
+ sets border radius to 50% so it gets circular shape
+ sets color of border to a light color
+ sets color of border-top which is the top border of rectangular shape to black
+ top border in circular shape is 1/4 of that circle
+ sets animation of this circle to rotate around itself*/
 .loader {
      display: inline-block;
-     border: 0.2rem solid #ababab; /* Light grey */
-     border-top: 0.2rem solid #000000; /* Blue */
+     border: 0.2rem solid #ababab;
+     border-top: 0.2rem solid #000000;
      border-radius: 50%;
      width: 0.7rem;
      text-align: center;
      height: 0.7rem;
      animation: spin 1s linear infinite;
-   }
-   
-   @keyframes spin {
-     0% { transform: rotate(0deg); }
-     100% { transform: rotate(360deg); }
-   }
-   .text-center{
-     text-align:center!important
-   }
+}
+
+/* animation for loader component which should rotate */
+@keyframes spin {
+     0% {
+          transform: rotate(0deg);
+     }
+
+     100% {
+          transform: rotate(360deg);
+     }
+}
+/* align center children of a parent, the class is used for parent */
+.text-center {
+     text-align: center !important
+}
+
+
+.radio_btns_clear_hide{
+     opacity: 0;
+     pointer-events: none;
+     cursor: default;
+}
+#save-hint{
+     color: red;
+     font-size: 0.7rem;
+     transition: all 0.25s;
+     opacity: 0;
+}

@@ -14,7 +14,7 @@
 <body class="bg-image">
     <div class="flex-container align-justify-center full-screen-div">
         <div class="content-container flex-container" style="min-width: 40rem;">
-            <div class="column-6">
+            <div class="width-50">
                 <h1>
                     Mr. or Ms.?
                 </h1>
@@ -24,23 +24,24 @@
                     <div id="error-message" class="error-message">error</div>
 
                 </div>
-                <div style="margin-top: 1rem; margin-bottom: 1rem;">
-
+                <div style="margin: 1rem 0 1rem 0;">
                     <input type="radio" id="male" name="gender" value="male">
                     <label for="male">Male</label><br>
                     <div style="height: 0.5rem;"></div>
                     <input type="radio" id="female" name="gender" value="female">
                     <label for="female">Female</label><br>
-                    <button class="clear-btn">clear</button>
+                    <button  class="clear-btn radio_btns_clear_hide">clear</button>
                 </div>
                 <div>
                     <button class="btn text-center" id="submit-btn" disabled>Submit</button>
                     <br/>
                     <button class="btn" id="save-btn" disabled>Save</button>
-
+                    <div  id="save-hint">
+                        If no genders be selected, the prediction result will be saved!
+                    </div>
                 </div>
             </div>
-            <div class="column-6">
+            <div class="width-50">
                 <h1>
                     Prediction
                 </h1>
@@ -59,7 +60,7 @@
 
         </div>
     </div>
-    <div id="snackbar" class="snackbar">Some text some message..</div>
+    <div id="snackbar" class="snackbar">Some text ...</div>
 
 </body>
 
