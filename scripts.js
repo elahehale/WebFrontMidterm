@@ -1,4 +1,4 @@
-// 
+ // code inside this function will be executed when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
     // clear btn for radio btns to set gender
     var clearGenderButton = document.querySelector('.clear-btn');
@@ -30,25 +30,30 @@ document.addEventListener('DOMContentLoaded', function () {
     // the snackbar element which shows alerts or errors
     var snackbar = document.getElementById("snackbar");
 
+    // a variable to save prediction result from fetch
     var prediction = null
 
+    // gender selection radio btns
     var maleRadio = document.getElementById("male");
     var femaleRadio = document.getElementById("female");
+
+    // add event listener to handle click on radio btns with handleRadioClick function
     maleRadio.addEventListener("click", handleRadioClick);
     femaleRadio.addEventListener("click", handleRadioClick);
 
+    // this functions shows a clear btn for radio btns selection if any radio btn was selected
     function handleRadioClick() {
-        // If the radio button is already selected, clear it
         if (this.checked) {
-            clearGenderButton.classList.remove('radio_btns_clear_hide')
+            clearGenderButton.classList.remove('btn-hide')
         }
     }
 
     // clearGenderButton, unchecks all radio btns for selecting gender on click event
+    // after clearing the selection, it gets hide
     clearGenderButton.addEventListener('click', function () {
         radioButtons.forEach(function (radioButton) {
             radioButton.checked = false;
-            clearGenderButton.classList.add('radio_btns_clear_hide')
+            clearGenderButton.classList.add('btn-hide')
 
         });
     });
@@ -62,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('input change', prediction)
         if (!nameValidate(nameInput.value)) {
             nameErrorMessageElement.style.opacity = 1
-            nameInput.classList.add('error');
+            nameInput.classList.add('input-error');
             enableButtons(false)
         } else {
             nameErrorMessageElement.style.opacity = 0
-            nameInput.classList.remove('error');
+            nameInput.classList.remove('input-error');
             enableButtons(true)
         }
     })
@@ -75,6 +80,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function enableButtons(enability) {
         submitButton.disabled = !enability
         saveButton.disabled = !enability
+    }
+
+    // reset btns templates
+    // enables submit and save btns
+    // set proper text for submit btn
+    function resetButtons() {
+        enableButtons(true)
+        submitButton.innerHTML = 'Submit'
     }
 
     // validate given name with 3 constraints
@@ -111,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // if fetch get response which has status=ok but the predicted gender is null, snackbar shows error message
     // else the results will be showd in prediction section
     submitButton.addEventListener('click', function () {
-        var name = nameInput.value
+        var name = nameInput.value.toLowerCase()
         var url = 'https://api.genderize.io/?name=' + name;
         clearResults()
         enableButtons(false)
@@ -129,11 +142,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     showSnackBar('No result for this name from server', 'red')
                     genderOutput.textContent = 'No result for this name from server';
                 } else {
+                    // set prediction results in page
                     genderOutput.textContent = data.gender;
                     probOutput.textContent = data.probability;
+                    // set prediction variable to result gender
                     prediction = data.gender
                     console.log(prediction)
                 }
+                // show saved prediction for input
                 showSavedPrediction(nameInput.value)
             })
             .catch(error => {
@@ -144,17 +160,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
-    // enables submit and save btns
-    // set proper text for submit btn
-    function resetButtons() {
-        enableButtons(true)
-        submitButton.innerHTML = 'Submit'
-    }
 
 
-
+    // btn for saving prediction
     var saveButton = document.getElementById('save-btn');
+    // container of a hint for save btn
     var saveHint = document.getElementById('save-hint');
+
+    // show a hint under save btn for what will be saved if no gender is selected
     saveButton.addEventListener('mouseenter', function () {
         var saveValue = null
         radioButtons.forEach(function (radioButton) {
@@ -163,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
         saveHint.style.opacity = 0;
+        // if no gender is selected for input and btn is not disabled, show hint which says the prediction will be saved
         if (saveValue === null && !saveButton.disabled) {
             saveHint.style.opacity = 1;
         }
@@ -184,16 +198,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 saveValue = radioButton.value
             }
         });
-        console.log('yoyo',prediction)
-
+        // if no gender is selected and no prediction has made yet for this input, shows error
         if (saveValue === null && prediction === null) {
             showSnackBar('Choose or predict gender for this input first!', 'red')
         } else {
             if (saveValue != null){
-                localStorage.setItem(nameInput.value, saveValue);
+                localStorage.setItem(nameInput.value.toLowerCase(), saveValue);
             }
             else{
-                localStorage.setItem(nameInput.value, prediction);
+                localStorage.setItem(nameInput.value.toLowerCase(), prediction);
             }
             showSnackBar('Name saved successfully', 'black')
             showSavedPrediction(nameInput.value)
@@ -202,14 +215,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
     })
+    // empty prediction results in page
     function clearPredictionResult(){
         genderOutput.textContent = '';
         probOutput.textContent = '';
     }
     // clearSavedAnswerButton on click, removes the name in input field from local storage
     clearSavedAnswerButton.addEventListener('click', function () {
-        localStorage.removeItem(nameInput.value);
-        showSavedPrediction()
+        localStorage.removeItem(nameInput.value.toLowerCase());
+        showSavedPrediction(nameInput.value)
     })
 
     // this function shows saved gender for given name
@@ -217,13 +231,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // if name is not in local storage the value will be null so answerSection will not be showed
     // if value is not null, we set result text to value and make answerSection visible
     function showSavedPrediction(name) {
-        var item = localStorage.getItem(name);
+        var item = localStorage.getItem(name.toLowerCase());
         if (item !== null) {
             // a text element which shows gender of given name and its in answerSection
             var savedValue = document.getElementById('saved-gender');
             savedValue.textContent = item
             answerSection.style.display = 'block'
-
         } else {
             answerSection.style.display = 'none'
         }

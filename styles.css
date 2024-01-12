@@ -7,43 +7,58 @@ set background size to cover entire page */
      background-size: cover;
 }
 
+/* font an initial styling */
 body,
 html {
      font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
      height: 100%;
      width: 100%;
+     min-height: 100%;
      margin: 0;
 }
 
-.full-screen-div {
-     width: 100vw;
-     height: 100%;
-     min-height: 100%;
-     box-sizing: border-box;
-     overflow-x: hidden;
-     overflow-y: hidden;
-}
-
-.flex-container {
-     display: flex;
-}
-
+/* set align-items and justify-content to center */
 .align-justify-center {
      align-items: center;
      justify-content: center;
 }
 
-.width-50 {
-     width: 50% !important;
-     padding: 0.4rem;
+/* flex container  */
+.flex-row {
+     display: flex;
+
 }
 
+/* Set flex div properties for a column  */
+.flex-col {
+     display: flex;
+     flex-direction: column;
+}
+
+/* set top margin of div to level 1 which is 0.2rem */
+.margin-top-1 {
+     margin-top: 0.2rem;
+}
+
+/* set bottom margin to 0. no bottom margin */
+.margin-bottom-0 {
+     margin-bottom: 0;
+}
+
+/* align center children of a parent, the class is used for parent */
+.text-center {
+     text-align: center !important
+}
+
+/* main box in page which has a somehow transparent background */
 .content-container {
      padding: 1rem 1.5rem 1rem 1.5rem;
      border-radius: 1.5rem;
      background-color: rgba(255, 255, 255, 0.86);
+     min-width: 40rem;
 }
 
+/* styles of name input field */
 .name-input-field {
      padding: 0 8px;
      vertical-align: middle;
@@ -51,97 +66,77 @@ html {
      min-height: 36px;
      background-color: #ffffff;
      border: 2px solid rgba(0, 0, 0);
+     /* used in adding error style */
      transition: all 0.2s ease-in-out 0s;
      line-height: 18px;
      font-weight: normal;
 }
 
-input[type="radio"] {
-     display: none;
-     /* Hide the actual radio buttons */
+/* style of svae btn hint which is shown when no gender is selcted
+by default its not visible so opacity is set to 0 */
+#save-hint {
+     color: red;
+     font-size: 0.7rem;
+     transition: all 0.25s;
+     opacity: 0;
 }
 
-/* Style for the custom radio buttons */
+
+
+/* radio btns styles */
+
+/* parent div of radio btns */
+.radio-btns-wraper {
+     margin: 1rem 0 1rem 0;
+}
+
+input[type="radio"] {
+     display: none;
+     /* hide the actual radio buttons */
+}
+
+/* style for the custom radio buttons */
 input[type="radio"]+label {
      position: relative;
      padding-left: 2rem;
-     /* Adjust the space between the label and the radio button */
+     /* adjust the space between the label and the radio button */
      cursor: pointer;
      display: inline-block;
 }
 
-/* Style for the custom radio button indicator */
+/* style for the custom radio button indicator */
 input[type="radio"]+label:before {
      content: '';
      position: absolute;
      left: 0;
      top: 0;
+     /* adjust the width of the indicator */
      width: 1rem;
-     /* Adjust the width of the indicator */
+     /* adjust the height of the indicator */
      height: 1rem;
-     /* Adjust the height of the indicator */
+     /* border color of the indicator */
      border: 2px solid #000000;
-     /* Border color of the indicator */
+     /* background color of the indicator */
      background-color: #fff;
-     /* Background color of the indicator */
+     /* make it a circle */
      border-radius: 50%;
-     /* Make it a circle */
 }
 
+/* style for radio btn indicator when not selected */
 input[type="radio"]:not(:checked)+label:before {
+     /* reset background color when not selected */
      background-color: #fff !important;
-     /* Reset background color when not selected */
+     /* border color when not selected */
      border-color: #000000;
-     /* Border color when not selected */
 }
 
-/* Style for the custom radio button when selected */
+/* style for radio button indicator when selected */
 input[type="radio"]:checked+label:before {
+     /* change background color when selected */
      background-color: #000000;
-     /* Change background color when selected */
-     border-color: #000000;
-     /* Change border color when selected */
 }
 
-input[type="radio"]+label {
-     pointer-events: all;
-}
-
-.btn {
-     min-width: 10rem !important;
-     background-color: #ffffff;
-     color: black;
-     padding: 0.5rem;
-     border: 2px solid black;
-     cursor: pointer;
-     border-radius: 5px;
-     text-align: center;
-     margin: 0.5rem 0 0.5rem 0;
-     transition: all 0.2s;
-
-}
-
-.btn:hover {
-     background-color: black;
-     color: white;
-}
-
-.btn:disabled {
-     color: rgba(0, 0, 0, 0.3);
-     border: 2px solid rgba(0, 0, 0, 0.3);
-     background-color: transparent;
-     /* Ensures no background color on disabled state */
-     cursor: not-allowed;
-}
-
-.btn:disabled:hover {
-     color: rgba(0, 0, 0, 0.3);
-     border: 2px solid rgba(0, 0, 0, 0.3);
-     background-color: transparent;
-     /* Ensures no background color on disabled state */
-
-}
-
+/* styles for clear btn to clear radio btns */
 .clear-btn {
      background-color: #ffffff00;
      color: rgba(0, 0, 0, 0.3);
@@ -150,37 +145,100 @@ input[type="radio"]+label {
      border-radius: 5px;
      text-align: center;
      margin: 0.5rem 0 0.5rem 0;
+     /* for smooth change in style */
      transition: all 0.2s;
 }
 
+/* style of clear btn on hovering */
 .clear-btn:hover {
      border: 2px solid black;
      color: black;
-
 }
 
+
+/* end of radio btn styles */
+
+
+/* general btn styles */
+
+/* general style for btns */
+.btn {
+     min-width: 10rem !important;
+     background-color: #ffffff;
+     color: black;
+     padding: 0.5rem;
+     border: 2px solid black;
+     cursor: pointer;
+     /* smoothen the border */
+     border-radius: 5px;
+     text-align: center;
+     margin: 0.5rem 0 0.5rem 0;
+     /* for smooth change in style on hover */
+     transition: all 0.2s;
+}
+
+/* change bg-color and text color of btn on hover */
+.btn:hover {
+     background-color: black;
+     color: white;
+}
+
+/* set specific style for btn with disabled attr */
+.btn:disabled,
+.btn:disabled:hover {
+     color: rgba(0, 0, 0, 0.3);
+     border: 2px solid rgba(0, 0, 0, 0.3);
+     /* ensures no background color on disabled state */
+     background-color: transparent;
+     /* cursur shows not clickable */
+     cursor: not-allowed;
+}
+
+/* style for a btn which is hide */
+.btn-hide {
+     opacity: 0;
+     pointer-events: none;
+     cursor: default;
+}
+
+/* end of btn styles */
+
+
+
+
+/* style of saved answer container which has dotted border */
 .saved-answer-container {
      border: dotted rgb(95, 95, 95) 2px;
      border-radius: 5px;
      padding: 0.5rem;
+     /* by default its not visible */
      display: none;
 }
 
+/* style of name input field error message div */
 .error-message {
      color: red;
      margin-top: 5px;
+     /* the error div is not visible by default */
+     /* we use opacity to have notchangable height for error message div */
      opacity: 0;
+     /* for being visible smoothly */
      transition: all 0.2s;
      font-size: 0.7rem;
      padding-left: 3.2rem;
 }
 
-.error {
+/* style of name input field on error */
+.input-error {
      outline: none !important;
      border: solid 2px red;
 }
 
-/* style a loader
+
+
+
+
+/* style of a loader
  sets border radius to 50% so it gets circular shape
  sets color of border to a light color
  sets color of border-top which is the top border of rectangular shape to black
@@ -207,20 +265,35 @@ input[type="radio"]+label {
           transform: rotate(360deg);
      }
 }
-/* align center children of a parent, the class is used for parent */
-.text-center {
-     text-align: center !important
-}
 
 
-.radio_btns_clear_hide{
-     opacity: 0;
-     pointer-events: none;
-     cursor: default;
-}
-#save-hint{
-     color: red;
-     font-size: 0.7rem;
+/* snackbar styles */
+.snackbar {
+     min-width: 250px;
+     /* set a default minimum width */
+     left: 50%;
+     /* translate the element back by 50% of its own width which
+      effectively centers the element. */
+     transform: translate(-50%);
+     background-color: #333;
+     /* black background color */
+     color: #fff;
+     /* white text color */
+     text-align: center;
+     /* centered text */
+     border-radius: 2px;
+     /* rounded borders */
+     padding: 16px;
+     position: fixed;
+     z-index: 1;
+     /* add a z-index */
+     bottom: 30px;
+     /* 30px from the bottom */
      transition: all 0.25s;
      opacity: 0;
+}
+
+/* show a div which was hidden by 0 opacity */
+.show {
+     opacity: 1;
 }

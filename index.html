@@ -2,64 +2,88 @@
 <html lang="en">
 
 <head>
+    <!-- meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- page title -->
     <title>Mr or Ms?</title>
+
+    <!-- links to stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="snackbar_styles.css">
+
+    <!-- link to scripts -->
     <script src="scripts.js"></script>
 
 </head>
 
-<body class="bg-image">
-    <div class="flex-container align-justify-center full-screen-div">
-        <div class="content-container flex-container" style="min-width: 40rem;">
-            <div class="width-50">
-                <h1>
-                    Mr. or Ms.?
-                </h1>
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" class="name-input-field" id="name" name="name">
-                    <div id="error-message" class="error-message">error</div>
-
-                </div>
-                <div style="margin: 1rem 0 1rem 0;">
-                    <input type="radio" id="male" name="gender" value="male">
-                    <label for="male">Male</label><br>
-                    <div style="height: 0.5rem;"></div>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">Female</label><br>
-                    <button  class="clear-btn radio_btns_clear_hide">clear</button>
-                </div>
-                <div>
-                    <button class="btn text-center" id="submit-btn" disabled>Submit</button>
-                    <br/>
-                    <button class="btn" id="save-btn" disabled>Save</button>
-                    <div  id="save-hint">
-                        If no genders be selected, the prediction result will be saved!
-                    </div>
+<body class="bg-image flex-row align-justify-center">
+    <!-- container of results and input fields -->
+    <div class="content-container flex-row">
+        <!-- left column including input fields ,submit btn and save btn -->
+        <div class="flex-col">
+            <!-- title -->
+            <h1>
+                Mr. or Ms.?
+            </h1>
+            <!-- div containing name input field and label and error message -->
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" class="name-input-field" id="name" name="name">
+                <div id="error-message" class="error-message">error</div>
+            </div>
+            <!-- div containing radio btns and clear btn -->
+            <div class="radio-btns-wraper">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <!-- give space between radio btns -->
+                <br /><br />
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br>
+                <!-- clear btn for radio btn selections -->
+                <button class="clear-btn btn-hide">clear</button>
+            </div>
+            <!-- div containing action btns including submit and save btns -->
+            <div>
+                <!-- submit btn to send request to url and show results -->
+                <button class="btn text-center" id="submit-btn" disabled>Submit</button>
+                <br />
+                <!-- save btn to save chosen gender or prediction result for given input -->
+                <button class="btn" id="save-btn" disabled>Save</button>
+                <!-- small hint for what will be saved if no gender is selected -->
+                <div id="save-hint">
+                    If no genders be selected, the prediction result will be saved!
                 </div>
             </div>
-            <div class="width-50">
-                <h1>
-                    Prediction
-                </h1>
-                <div>
-                    <p id="predicted-gender"></p>
-                    <p id="predicted-probability"></p>
-                    <div class="saved-answer-container" id="saved-answer-section">
-                        <h1 style="margin-top: 0.2rem;">
-                            Saved Answer
-                        </h1>
-                        <p id="saved-gender"></p>
-                        <button class="btn" id="clear-saved-answer-btn" style="margin-bottom: 0;">Clear</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
+        <!-- right column including results -->
+        <div class="flex-col">
+            <!-- title -->
+            <h1>
+                Prediction
+            </h1>
+            <div>
+                <!-- fetched gender -->
+                <p id="predicted-gender"></p>
+                <!-- fetched probability -->
+                <p id="predicted-probability"></p>
+                <!-- a div containing saved gender by user -->
+                <div class="saved-answer-container" id="saved-answer-section">
+                    <!-- title -->
+                    <h1 class="margin-top-1">
+                        Saved Answer
+                    </h1>
+                    <!-- saved gender -->
+                    <p id="saved-gender"></p>
+                    <!-- btn to clear saved answer -->
+                    <button class="btn margin-bottom-0" id="clear-saved-answer-btn">Clear</button>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- snackbar div which is hidden by default and will be shown on errors or success messages -->
     <div id="snackbar" class="snackbar">Some text ...</div>
 
 </body>
